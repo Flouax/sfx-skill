@@ -1,0 +1,102 @@
+{
+  "_说明": "动作类型 → 检索参数。全部是起步值，待有 Freesound key 后实测调整；改这个文件不需要改代码。filter 是始终生效的条件；descriptor_filter 是服务器端音频指标条件，结果少于 5 条时会去掉它重查。negative 里的词会以 -词 的形式放进查询，并在本地打分时再减分。target 是打分时希望贴近的指标值。align 为 peak 表示把峰值对准事件时刻，为 start 表示从事件时刻开始播。peak_target_db 是放置表里建议音量的目标峰值电平。",
+  "_数值来源": "transition、card_in、click、paper_slide、impact 的时长与指标范围取自专家报告 3.1 节（原文标注为推断）；typing、success、error 三类专家报告没有给数值，是本实现新增的起步值；所有 peak_target_db 和 strength_gain_db 也是本实现新增的起步值。",
+  "strength_gain_db": {"weak": -6, "medium": 0, "strong": 3},
+  "actions": {
+    "transition": {
+      "label": "转场",
+      "aliases": ["转场", "whoosh", "swoosh"],
+      "queries": ["whoosh transition", "swoosh"],
+      "negative": ["loop", "music", "voice"],
+      "filter": {"duration": [0.4, 2.0]},
+      "descriptor_filter": {"temporal_centroid_ratio": [0.3, 0.7]},
+      "target": {"temporal_centroid_ratio": 0.5},
+      "align": "peak",
+      "peak_target_db": -10,
+      "local_tags": ["whoosh", "swoosh", "swish", "transition", "woosh"]
+    },
+    "card_in": {
+      "label": "卡片入场",
+      "aliases": ["卡片入场", "入场", "pop"],
+      "queries": ["pop ui", "short swoosh"],
+      "negative": ["loop", "music", "voice"],
+      "filter": {"duration": [0.1, 0.8]},
+      "descriptor_filter": {"start_time": [0, 0.03]},
+      "target": {},
+      "align": "peak",
+      "peak_target_db": -12,
+      "local_tags": ["pop", "swoosh", "appear", "open", "maximize", "drop"]
+    },
+    "click": {
+      "label": "按钮点击",
+      "aliases": ["按钮点击", "点击", "button"],
+      "queries": ["button click", "ui click"],
+      "negative": ["loop", "music", "voice"],
+      "filter": {"duration": [0.02, 0.4]},
+      "descriptor_filter": {"single_event": true, "start_time": [0, 0.02], "amplitude_peak_ratio": [0, 0.2]},
+      "target": {"amplitude_peak_ratio": 0.1},
+      "align": "peak",
+      "peak_target_db": -12,
+      "local_tags": ["click", "switch", "button", "select", "tick"]
+    },
+    "paper_slide": {
+      "label": "纸张滑动",
+      "aliases": ["纸张滑动", "纸张", "paper"],
+      "queries": ["paper slide", "paper swipe"],
+      "negative": ["crumple", "tear"],
+      "filter": {"duration": [0.3, 1.5]},
+      "descriptor_filter": {},
+      "target": {},
+      "align": "start",
+      "peak_target_db": -14,
+      "local_tags": ["paper", "slide", "page", "book", "card"]
+    },
+    "impact": {
+      "label": "碰撞",
+      "aliases": ["碰撞", "撞击", "hit"],
+      "queries": ["impact hit", "thud"],
+      "negative": ["loop", "music", "voice"],
+      "filter": {"duration": [0.1, 1.5]},
+      "descriptor_filter": {"single_event": true, "amplitude_peak_ratio": [0, 0.15]},
+      "target": {"amplitude_peak_ratio": 0.05},
+      "align": "peak",
+      "peak_target_db": -8,
+      "local_tags": ["impact", "hit", "thud", "punch", "knock", "bump"]
+    },
+    "typing": {
+      "label": "打字",
+      "aliases": ["打字", "键盘", "keyboard"],
+      "queries": ["keyboard key press", "typing single key"],
+      "negative": ["loop", "music", "voice"],
+      "filter": {"duration": [0.03, 0.4]},
+      "descriptor_filter": {"single_event": true},
+      "target": {},
+      "align": "peak",
+      "peak_target_db": -16,
+      "local_tags": ["keyboard", "key", "typing", "type", "keypress"]
+    },
+    "success": {
+      "label": "成功提示",
+      "aliases": ["成功提示", "成功", "confirm"],
+      "queries": ["success chime", "positive notification"],
+      "negative": ["loop", "voice"],
+      "filter": {"duration": [0.3, 2.0]},
+      "descriptor_filter": {},
+      "target": {},
+      "align": "start",
+      "peak_target_db": -12,
+      "local_tags": ["success", "confirmation", "confirm", "chime", "win", "positive"]
+    },
+    "error": {
+      "label": "错误提示",
+      "aliases": ["错误提示", "错误", "失败", "fail"],
+      "queries": ["error beep", "negative notification"],
+      "filter": {"duration": [0.15, 1.5]},
+      "descriptor_filter": {},
+      "target": {},
+      "align": "start",
+      "peak_target_db": -12,
+      "local_tags": ["error", "fail", "wrong", "negative", "denied", "buzz"]
+    }
+  }
+}
