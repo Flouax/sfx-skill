@@ -1,0 +1,66 @@
+{
+  "_说明": "许可类别表。allowed 为 true 的类别才会进入候选、放置表和署名清单。默认按“视频有收入”处理：排除 NC、Sampling+ 和未知许可。条款依据见方案文档 2026-11-11-音效库技能-整合优化方案.md 第 1.4 节和第 4.6 节。",
+  "classes": {
+    "cc0": {
+      "label": "CC0 1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "allowed": true,
+      "monetized_ok": true,
+      "attribution": false,
+      "freesound_filter_name": "Creative Commons 0",
+      "status": "Freesound 的 CC0 已读官方 FAQ 原文；Kenney 以压缩包内的许可文件为准"
+    },
+    "cc-by": {
+      "label": "CC BY",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "allowed": true,
+      "monetized_ok": true,
+      "attribution": true,
+      "freesound_filter_name": "Attribution",
+      "template": "\"{title}\" by {author} ( {url} ) licensed under {license}",
+      "status": "已读官方 FAQ 原文；署名格式取自 https://freesound.org/help/faq/"
+    },
+    "cc-by-nc": {
+      "label": "CC BY-NC",
+      "allowed": false,
+      "monetized_ok": false,
+      "attribution": true,
+      "status": "已读官方 FAQ 原文：作品不能赚钱。默认排除"
+    },
+    "sampling+": {
+      "label": "Sampling+",
+      "allowed": false,
+      "monetized_ok": false,
+      "attribution": true,
+      "status": "已读官方 FAQ 原文：类似 BY-NC 且不能用于广告。默认排除"
+    },
+    "mixkit-sfx-free": {
+      "label": "Mixkit Sound Effects Free License",
+      "url": "https://mixkit.co/license/modal/sfxFree/",
+      "allowed": true,
+      "monetized_ok": true,
+      "attribution": false,
+      "restrictions": "不得单独再分发，不得放进工具或模板，不得登记到版条管理服务",
+      "status": "已读许可原文"
+    },
+    "pixabay": {
+      "label": "Pixabay（条款未核实）",
+      "allowed": false,
+      "monetized_ok": false,
+      "attribution": false,
+      "status": "未核实：条款页没有读到原文。你自己读过并确认可用后，把 allowed 改成 true"
+    },
+    "unknown": {
+      "label": "未知许可",
+      "allowed": false,
+      "monetized_ok": false,
+      "attribution": false,
+      "status": "禁用"
+    }
+  },
+  "sources": {
+    "kenney": "cc0",
+    "mixkit": "mixkit-sfx-free",
+    "pixabay": "pixabay"
+  }
+}
