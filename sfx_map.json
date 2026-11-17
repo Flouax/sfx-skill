@@ -91,6 +91,7 @@
       "label": "错误提示",
       "aliases": ["错误提示", "错误", "失败", "fail"],
       "queries": ["error beep", "negative notification"],
+      "negative": ["loop", "voice"],
       "filter": {"duration": [0.15, 1.5]},
       "descriptor_filter": {},
       "target": {},
